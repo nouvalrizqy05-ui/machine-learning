@@ -1,6 +1,11 @@
 import React, { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FolderOpen, HardDrive } from 'lucide-react';
+import { FolderOpen } from 'lucide-react'; // Hapus HardDrive jika tidak dipakai agar bersih
+
+// --- PERUBAHAN 1: IMPORT GAMBAR DI SINI ---
+// Sesuaikan path '../assets/' jika file ini ada di dalam folder 'pages'
+import imageProjectCard from '../assets/image_project_card.png'; 
+// ------------------------------------------
 
 const ProjectPicker = () => {
   const navigate = useNavigate();
@@ -25,7 +30,7 @@ const ProjectPicker = () => {
   return (
     <div className="min-h-screen bg-gray-100 font-sans text-gray-800">
       
-      {/* HEADER / NAVBAR (Diberi Background & Shadow) */}
+      {/* HEADER / NAVBAR */}
       <header className="bg-white px-8 py-5 shadow-sm border-b border-gray-200 sticky top-0 z-10">
         <div className="flex justify-between items-center max-w-7xl mx-auto w-full">
             <div 
@@ -39,11 +44,9 @@ const ProjectPicker = () => {
 
       {/* MAIN CONTENT */}
       <div className="max-w-6xl mx-auto p-12">
-        {/* Title: Diperbesar (text-5xl) */}
         <h1 className="text-5xl font-bold mb-12 text-gray-900">New Project</h1>
 
         <div className="flex flex-wrap gap-6 mb-16">
-            {/* Tombol File Real: Ukuran & Padding Diperbesar */}
             <button onClick={() => fileInputRef.current.click()} className="bg-white px-6 py-3.5 rounded-lg shadow-sm text-base font-semibold flex items-center gap-3 hover:bg-gray-50 border border-gray-200 transition text-gray-700">
                 <FolderOpen size={20} className="text-gray-500"/> Open an existing project from a file
             </button>
@@ -57,20 +60,24 @@ const ProjectPicker = () => {
             className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl cursor-pointer transition transform hover:-translate-y-1 border border-transparent hover:border-blue-100 group"
           >
             <div className="h-48 bg-gray-50 rounded-xl mb-6 flex items-center justify-center overflow-hidden border border-gray-100 group-hover:bg-blue-50 transition">
-                 {/* Ganti dengan gambar kartu projectmu */}
-                <img src="/assets/image_project_card.png" alt="Image Project" className="h-full w-full object-contain p-4" onError={(e) => {e.target.style.display='none'}} />
+                 {/* --- PERUBAHAN 2: GUNAKAN VARIABEL DI SINI --- */}
+                 {/* Hapus "./assets/..." ganti dengan {imageProjectCard} */}
+                <img 
+                    src={imageProjectCard} 
+                    alt="Image Project" 
+                    className="h-full w-full object-contain p-4" 
+                    onError={(e) => {e.target.style.display='none'}} 
+                />
             </div>
             
-            {/* Card Title: text-2xl */}
             <h3 className="text-2xl font-bold mb-3 text-gray-900 group-hover:text-blue-600 transition">Image Project</h3>
             
-            {/* Card Desc: text-lg (Agar nyaman dibaca) */}
             <p className="text-gray-600 text-lg leading-relaxed">
                 Teach based on images, from files or your webcam.
             </p>
           </div>
 
-          {/* Placeholder untuk project lain (Optional, agar grid terlihat rapi) */}
+          {/* Placeholder: Audio Project */}
           <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-200 opacity-60 grayscale cursor-not-allowed">
              <div className="h-48 bg-gray-50 rounded-xl mb-6 flex items-center justify-center">
                 <span className="text-gray-400 font-bold">Audio Project</span>
@@ -79,6 +86,7 @@ const ProjectPicker = () => {
              <p className="text-gray-400 text-lg leading-relaxed">Coming soon.</p>
           </div>
           
+          {/* Placeholder: Pose Project */}
           <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-200 opacity-60 grayscale cursor-not-allowed">
              <div className="h-48 bg-gray-50 rounded-xl mb-6 flex items-center justify-center">
                 <span className="text-gray-400 font-bold">Pose Project</span>

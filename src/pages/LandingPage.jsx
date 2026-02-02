@@ -3,6 +3,16 @@ import { useNavigate } from 'react-router-dom';
 import { Menu, ChevronDown, ChevronUp, Github, Instagram, Globe } from 'lucide-react';
 import Sidebar from '../components/Sidebar';
 
+// --- PERUBAHAN 1: IMPORT GAMBAR DI SINI ---
+// Pastikan path '../assets/' sesuai dengan struktur foldermu.
+// Jika file ini ada di folder 'src/pages/', dan gambar di 'src/assets/', gunakan '../assets/'
+// Jika file ini ada di 'src/', gunakan './assets/'
+import heroImg from '../assets/hero.png';
+import step1Img from '../assets/step1.png';
+import step2Img from '../assets/step2.png';
+import step3Img from '../assets/step3.png';
+// ------------------------------------------
+
 // Data FAQ
 const faqData = [
   { 
@@ -40,38 +50,38 @@ const LandingPage = () => {
     <div className="font-sans text-gray-800 bg-white min-h-screen scroll-smooth">
       <Sidebar isOpen={isSidebarOpen} onClose={() => setSidebarOpen(false)} onNewProject={() => navigate('/get-started')} />
 
-      {/* NAVBAR: Ukuran Font Diperbesar (text-lg & text-2xl) */}
-      <nav className="flex items-center justify-between px-8 py-5 sticky top-0 bg-white z-30 shadow-md transition-all">
+      {/* NAVBAR */}
+      <nav className="flex items-center justify-between px-6 py-4 sticky top-0 bg-white z-30 shadow-md transition-all">
         <div className="flex items-center gap-4">
           <button onClick={() => setSidebarOpen(true)} className="p-2 hover:bg-gray-100 rounded-full">
-            <Menu size={28} className="text-gray-600" />
+            <Menu size={24} className="text-gray-600" />
           </button>
-          {/* Logo Brand: text-2xl */}
-          <span className="text-2xl font-bold text-blue-600 tracking-tight">Vision Machine</span>
+          <span className="text-xl font-bold text-blue-600 tracking-tight">Vision Machine</span>
         </div>
-        
-        {/* Menu Links: text-lg */}
-        <div className="hidden md:flex gap-10 items-center font-medium text-gray-600 text-lg">
+        <div className="hidden md:flex gap-8 items-center font-medium text-gray-600 text-base">
           <a href="#about" className="hover:text-blue-600 cursor-pointer transition">About</a>
           <a href="#faq" className="hover:text-blue-600 cursor-pointer transition">FAQ</a>
-          <button onClick={() => navigate('/get-started')} className="bg-blue-600 text-white px-7 py-2.5 rounded-full font-bold hover:bg-blue-700 transition shadow-md hover:shadow-lg transform hover:-translate-y-0.5 text-lg">
+          <button onClick={() => navigate('/get-started')} className="bg-blue-600 text-white px-6 py-2 rounded-full font-bold hover:bg-blue-700 transition shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
             Get Started
           </button>
         </div>
       </nav>
 
       {/* HERO SECTION */}
-      <header id="about" className="max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center py-20 px-6 gap-16 scroll-mt-28">
+      <header id="about" className="max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center py-20 px-6 gap-16 scroll-mt-24">
         <div className="md:w-1/2 space-y-8">
           <h1 className="text-5xl md:text-7xl font-bold text-blue-600 leading-tight tracking-tight">
             Vision Machine
           </h1>
+          
           <h2 className="text-3xl md:text-4xl font-medium text-gray-900 leading-tight">
             Train a computer to recognize your own images, sounds, & poses.
           </h2>
+          
           <p className="text-gray-600 text-xl leading-relaxed max-w-lg">
             A fast, easy way to create machine learning models for your sites, apps, and more – no expertise or coding required.
           </p>
+          
           <button onClick={() => navigate('/get-started')} className="bg-blue-600 text-white px-9 py-4 rounded-full text-xl font-bold hover:shadow-xl hover:bg-blue-700 transition transform hover:-translate-y-1 mt-4">
             Get Started
           </button>
@@ -79,49 +89,61 @@ const LandingPage = () => {
         
         <div className="md:w-1/2 flex justify-center">
             <div className="w-full h-96 bg-white flex items-center justify-center">
-                 <img src="/assets/hero.png" alt="Hero Animation" className="object-contain h-full w-full drop-shadow-2xl" onError={(e) => e.target.style.display='none'} />
+                 {/* --- PERUBAHAN 2: GUNAKAN VARIABEL DI SINI (src={heroImg}) --- */}
+                 <img 
+                    src={heroImg} 
+                    alt="Hero Animation" 
+                    className="object-contain h-full w-full drop-shadow-2xl" 
+                 />
             </div>
         </div>
       </header>
 
-      {/* HOW IT WORKS */}
+      {/* HOW IT WORKS SECTION */}
       <section className="bg-white py-24 px-6">
         <div className="max-w-6xl mx-auto text-center mb-20">
            <h2 className="text-4xl md:text-5xl font-bold text-gray-900">How do I use it?</h2>
         </div>
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-16 text-left">
+          
           {/* Step 1 */}
           <div className="space-y-5 group">
              <div className="h-56 bg-white rounded-2xl flex items-center justify-center mb-6 transition transform group-hover:scale-105 duration-300">
-                <img src="/assets/step1.png" alt="Gather" className="h-full object-contain drop-shadow-lg"/>
+                {/* --- PERUBAHAN 3: GUNAKAN VARIABEL --- */}
+                <img src={step1Img} alt="Gather" className="h-full object-contain drop-shadow-lg"/>
              </div>
             <span className="text-gray-400 font-bold text-lg">01</span>
             <h3 className="text-2xl font-bold text-gray-900">Gather</h3>
             <p className="text-gray-600 text-lg leading-relaxed">Gather and group your examples into classes, or categories, that you want the computer to learn.</p>
           </div>
+          
           {/* Step 2 */}
           <div className="space-y-5 group">
              <div className="h-56 bg-white rounded-2xl flex items-center justify-center mb-6 transition transform group-hover:scale-105 duration-300">
-                <img src="/assets/step2.png" alt="Train" className="h-full object-contain drop-shadow-lg"/>
+                {/* --- PERUBAHAN 4: GUNAKAN VARIABEL --- */}
+                <img src={step2Img} alt="Train" className="h-full object-contain drop-shadow-lg"/>
              </div>
             <span className="text-gray-400 font-bold text-lg">02</span>
             <h3 className="text-2xl font-bold text-gray-900">Train</h3>
             <p className="text-gray-600 text-lg leading-relaxed">Train your model, then instantly test it out to see whether it can correctly classify new examples.</p>
           </div>
+          
           {/* Step 3 */}
           <div className="space-y-5 group">
              <div className="h-56 bg-white rounded-2xl flex items-center justify-center mb-6 transition transform group-hover:scale-105 duration-300">
-                <img src="/assets/step3.png" alt="Export" className="h-full object-contain drop-shadow-lg"/>
+                {/* --- PERUBAHAN 5: GUNAKAN VARIABEL --- */}
+                <img src={step3Img} alt="Export" className="h-full object-contain drop-shadow-lg"/>
              </div>
             <span className="text-gray-400 font-bold text-lg">03</span>
             <h3 className="text-2xl font-bold text-gray-900">Export</h3>
             <p className="text-gray-600 text-lg leading-relaxed">Export your model for your projects: sites, apps, and more. You can download your model or host it online.</p>
           </div>
+
         </div>
       </section>
       
       {/* FAQ SECTION */}
-      <section id="faq" className="bg-gray-50 py-24 px-6 scroll-mt-24">
+      <section id="faq" className="bg-gray-50 py-24 px-6 scroll-mt-16">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-4xl font-bold mb-16 text-center text-gray-900">Frequently Asked Questions</h2>
           <div className="space-y-6">
@@ -136,6 +158,7 @@ const LandingPage = () => {
                   </span>
                   {openFaqIndex === index ? <ChevronUp className="text-blue-600" /> : <ChevronDown className="text-gray-400" />}
                 </button>
+                
                 <div className={`px-8 overflow-hidden transition-all duration-300 ease-in-out ${openFaqIndex === index ? 'max-h-64 py-6 opacity-100' : 'max-h-0 py-0 opacity-0'}`}>
                   <p className="text-gray-600 text-lg leading-relaxed border-t border-gray-100 pt-4">
                     {item.a}
