@@ -253,8 +253,8 @@ const Studio = () => {
   const getClassColor = (id) => ['bg-orange-400', 'bg-purple-500', 'bg-green-500', 'bg-blue-500'][id % 4] || 'bg-gray-500';
 
   return (
-    // Menggunakan text-sm (14px) sebagai base global (Medium Size)
-    <div className="flex flex-col h-screen bg-[#e8eaed] overflow-hidden font-sans text-sm">
+    // Menggunakan text-xs secara global dan padding lebih kecil
+    <div className="flex flex-col h-screen bg-[#e8eaed] overflow-hidden font-sans text-xs">
       <Sidebar 
         isOpen={isSidebarOpen} 
         onClose={() => setSidebarOpen(false)} 
@@ -264,53 +264,53 @@ const Studio = () => {
       />
       <input type="file" ref={fileInputRef} onChange={handleLoadFile} className="hidden" accept=".json" />
 
-      {/* HEADER: Compact (py-2) */}
-      <header className="bg-white border-b px-4 py-2 flex items-center gap-4 shrink-0 shadow-sm z-10">
-        <button onClick={() => setSidebarOpen(true)} className="p-2 hover:bg-gray-100 rounded-full">
-            <Menu className="text-blue-600" size={20} />
+      {/* HEADER: Sangat Compact (py-1) */}
+      <header className="bg-white border-b px-4 py-1 flex items-center gap-3 shrink-0 shadow-sm z-10">
+        <button onClick={() => setSidebarOpen(true)} className="p-1.5 hover:bg-gray-100 rounded-full">
+            <Menu className="text-blue-600" size={18} />
         </button>
         <div className="flex items-center gap-2">
-            <h1 className="font-bold text-gray-700 text-lg">Vision Machine</h1>
+            <h1 className="font-bold text-gray-700 text-sm">Vision Machine</h1>
             <span className="text-gray-300">|</span>
-            <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">Image Project</span>
+            <span className="text-[10px] font-medium text-gray-500 uppercase tracking-wide">Image Project</span>
         </div>
       </header>
 
-      {/* MAIN CONTAINER: Padding p-4 (Middle Ground) */}
+      {/* MAIN CONTAINER: Padding dikurangi drastis ke p-2 */}
       <main className="flex-1 overflow-hidden relative">
-        <div className="absolute inset-0 overflow-x-auto overflow-y-hidden p-4">
-            <div className="flex gap-4 h-full min-w-[900px] mx-auto max-w-screen-xl">
+        <div className="absolute inset-0 overflow-x-auto overflow-y-hidden p-2">
+            <div className="flex gap-3 h-full min-w-[800px] mx-auto max-w-screen-xl">
                 
                 {/* COLUMN 1: CLASSES */}
-                <div className="w-[40%] flex flex-col gap-4 overflow-y-auto h-full pr-2 pb-20 custom-scrollbar">
+                <div className="w-[40%] flex flex-col gap-3 overflow-y-auto h-full pr-1 pb-20 custom-scrollbar">
                     {classes.map((cls) => (
-                        // Card Padding p-3
-                        <div key={cls.id} className="bg-white rounded-lg shadow-sm border border-gray-200 p-3 relative transition hover:shadow-md">
+                        // Card Padding dikurangi jadi p-2
+                        <div key={cls.id} className="bg-white rounded-lg shadow-sm border border-gray-200 p-2 relative transition hover:shadow-md">
                             {/* Header Class */}
-                            <div className="flex justify-between items-center mb-2 border-b pb-2 relative">
+                            <div className="flex justify-between items-center mb-1 border-b pb-1 relative">
                                  <input 
                                     value={cls.name}
                                     ref={editingClassId === cls.id ? (input) => input && input.focus() : null}
                                     onBlur={() => setEditingClassId(null)}
                                     onChange={(e) => handleRenameClass(cls.id, e.target.value)}
-                                    // Font input title text-base (16px) agar jelas
-                                    className={`font-medium text-gray-700 border-none focus:ring-0 w-full text-base p-0 ${editingClassId === cls.id ? 'bg-blue-50 px-2 rounded' : ''}`}
+                                    // Font input title dikurangi ke text-xs
+                                    className={`font-medium text-gray-700 border-none focus:ring-0 w-full text-xs p-0 ${editingClassId === cls.id ? 'bg-blue-50 px-1 rounded' : ''}`}
                                 />
                                 <div className="flex gap-1 items-center">
-                                    <button onClick={() => setEditingClassId(cls.id)} className="text-gray-400 hover:text-blue-500 p-1">
-                                        <Edit2 size={16}/>
+                                    <button onClick={() => setEditingClassId(cls.id)} className="text-gray-400 hover:text-blue-500 p-0.5">
+                                        <Edit2 size={14}/>
                                     </button>
-                                    <button onClick={() => setOpenMenuClassId(openMenuClassId === cls.id ? null : cls.id)} className="text-gray-400 hover:text-red-500 relative p-1">
-                                        <MoreVertical size={16}/>
+                                    <button onClick={() => setOpenMenuClassId(openMenuClassId === cls.id ? null : cls.id)} className="text-gray-400 hover:text-red-500 relative p-0.5">
+                                        <MoreVertical size={14}/>
                                     </button>
                                     {openMenuClassId === cls.id && (
-                                        <div className="absolute right-0 top-8 bg-white shadow-lg border rounded w-32 z-20 py-1">
+                                        <div className="absolute right-0 top-5 bg-white shadow-lg border rounded w-28 z-20 py-1">
                                             <button 
                                                 onClick={() => handleDeleteClass(cls.id)}
                                                 disabled={classes.length <= 2}
-                                                className={`w-full text-left px-3 py-2 text-xs flex items-center gap-2 ${classes.length <= 2 ? 'text-gray-300 cursor-not-allowed' : 'text-red-600 hover:bg-red-50'}`}
+                                                className={`w-full text-left px-2 py-1.5 text-[10px] flex items-center gap-1 ${classes.length <= 2 ? 'text-gray-300 cursor-not-allowed' : 'text-red-600 hover:bg-red-50'}`}
                                             >
-                                                <Trash2 size={14}/> Delete Class
+                                                <Trash2 size={10}/> Delete Class
                                             </button>
                                         </div>
                                     )}
@@ -318,28 +318,28 @@ const Studio = () => {
                             </div>
 
                             {/* Body Kartu */}
-                            <div className="flex gap-3">
-                                <div className="flex-1 min-h-[140px]">
+                            <div className="flex gap-2">
+                                <div className="flex-1 min-h-[120px]">
                                     {activeWebcamId === cls.id ? (
-                                        <div className="flex flex-col gap-2 h-full">
+                                        <div className="flex flex-col gap-1 h-full">
                                             <div className="relative bg-black rounded overflow-hidden aspect-[4/3]">
                                                 <video ref={activeVideoRef} className="w-full h-full object-cover transform scale-x-[-1]" muted playsInline />
-                                                <button onClick={handleCloseClassCamera} className="absolute top-1 right-1 bg-black/50 hover:bg-black/70 text-white p-1 rounded-full z-10"><X size={14}/></button>
+                                                <button onClick={handleCloseClassCamera} className="absolute top-1 right-1 bg-black/50 hover:bg-black/70 text-white p-0.5 rounded-full z-10"><X size={12}/></button>
                                             </div>
-                                            {/* Button text-xs */}
-                                            <button onMouseDown={() => addExample(cls.id)} className="w-full py-2 bg-blue-600 text-white font-bold rounded shadow hover:bg-blue-700 active:scale-95 transition select-none text-xs">Hold to Record</button>
+                                            {/* Button lebih kecil (py-1.5) */}
+                                            <button onMouseDown={() => addExample(cls.id)} className="w-full py-1.5 bg-blue-600 text-white font-bold rounded shadow hover:bg-blue-700 active:scale-95 transition select-none text-[10px]">Hold to Record</button>
                                         </div>
                                     ) : (
-                                        <div className="bg-gray-50 rounded p-3 h-full flex flex-col justify-center gap-2 border border-dashed border-gray-200">
-                                            <p className="text-xs text-gray-500 mb-1">Add Samples:</p>
-                                            <div className="flex gap-2">
-                                                <button onClick={() => handleOpenClassCamera(cls.id)} className="flex-1 py-3 bg-blue-50 text-blue-600 rounded hover:bg-blue-100 flex flex-col items-center justify-center gap-1 transition">
-                                                    <Camera size={20}/> <span className="text-xs font-bold">Webcam</span>
+                                        <div className="bg-gray-50 rounded p-2 h-full flex flex-col justify-center gap-2 border border-dashed border-gray-200">
+                                            <p className="text-[10px] text-gray-500 mb-0.5">Add Samples:</p>
+                                            <div className="flex gap-2 h-full">
+                                                <button onClick={() => handleOpenClassCamera(cls.id)} className="flex-1 bg-blue-50 text-blue-600 rounded hover:bg-blue-100 flex flex-col items-center justify-center gap-1 transition py-2">
+                                                    <Camera size={16}/> <span className="text-[10px] font-bold">Webcam</span>
                                                 </button>
                                                 
                                                 <input type="file" accept="image/*" multiple className="hidden" id={`upload-input-${cls.id}`} onChange={(e) => handleImageUpload(e, cls.id)} />
-                                                <button onClick={() => document.getElementById(`upload-input-${cls.id}`).click()} className="flex-1 py-3 bg-white border border-gray-200 text-gray-600 rounded hover:bg-gray-50 flex flex-col items-center justify-center gap-1 transition">
-                                                    <Upload size={20}/> <span className="text-xs font-bold">Upload</span>
+                                                <button onClick={() => document.getElementById(`upload-input-${cls.id}`).click()} className="flex-1 bg-white border border-gray-200 text-gray-600 rounded hover:bg-gray-50 flex flex-col items-center justify-center gap-1 transition py-2">
+                                                    <Upload size={16}/> <span className="text-[10px] font-bold">Upload</span>
                                                 </button>
                                             </div>
                                         </div>
@@ -349,8 +349,8 @@ const Studio = () => {
                                 <div className="w-[40%] bg-white ">
                                     {cls.samples.length > 0 ? (
                                         <div className="flex flex-col h-full">
-                                             <p className="text-xs text-gray-500 mb-1">{cls.samples.length} Samples</p>
-                                             <div className="grid grid-cols-3 gap-1 overflow-y-auto max-h-[140px] pr-1 scrollbar-thin">
+                                             <p className="text-[10px] text-gray-500 mb-1">{cls.samples.length} Samples</p>
+                                             <div className="grid grid-cols-3 gap-1 overflow-y-auto max-h-[120px] pr-1 scrollbar-thin">
                                                 {cls.samples.map((imgSrc, idx) => (<img key={idx} src={imgSrc} className="w-full aspect-square object-cover rounded bg-gray-200 border border-gray-100" />))}
                                              </div>
                                         </div>
@@ -359,42 +359,42 @@ const Studio = () => {
                             </div>
                         </div>
                     ))}
-                    <button onClick={() => setClasses([...classes, {id: Date.now(), name: `Class ${classes.length + 1}`, samples: []}])} className="w-full py-3 border-2 border-dashed border-gray-300 text-gray-400 rounded hover:bg-white hover:border-gray-400 hover:text-gray-600 font-medium transition flex items-center justify-center gap-2 mb-10 text-xs">+ Add a class</button>
+                    <button onClick={() => setClasses([...classes, {id: Date.now(), name: `Class ${classes.length + 1}`, samples: []}])} className="w-full py-2 border-2 border-dashed border-gray-300 text-gray-400 rounded hover:bg-white hover:border-gray-400 hover:text-gray-600 font-medium transition flex items-center justify-center gap-2 mb-8 text-[10px]">+ Add a class</button>
                 </div>
 
-                {/* COLUMN 2: TRAINING (Padding p-3) */}
+                {/* COLUMN 2: TRAINING (Padding p-2) */}
                 <div className="w-[25%] flex flex-col gap-3">
-                    <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-3 sticky top-0">
-                        <h2 className="font-bold text-sm mb-4 text-gray-700">Training</h2>
-                        <button disabled={classes.every(c => c.samples.length === 0) || isTraining} onClick={trainModel} className={`w-full py-2.5 rounded text-white font-bold mb-3 transition shadow-sm text-sm ${isModelReadyState ? 'bg-green-500 hover:bg-green-600' : 'bg-blue-600 hover:bg-blue-700'} ${(classes.every(c => c.samples.length === 0) || isTraining) ? 'opacity-50 cursor-not-allowed' : ''}`}>
+                    <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-2 sticky top-0">
+                        <h2 className="font-bold text-xs mb-3 text-gray-700">Training</h2>
+                        <button disabled={classes.every(c => c.samples.length === 0) || isTraining} onClick={trainModel} className={`w-full py-2 rounded text-white font-bold mb-2 transition shadow-sm text-[10px] ${isModelReadyState ? 'bg-green-500 hover:bg-green-600' : 'bg-blue-600 hover:bg-blue-700'} ${(classes.every(c => c.samples.length === 0) || isTraining) ? 'opacity-50 cursor-not-allowed' : ''}`}>
                             {isTraining ? 'Training...' : (isModelReadyState ? 'Model Trained' : 'Train Model')}
                         </button>
                         {isTraining && (
-                            <div className="w-full bg-gray-200 rounded-full h-2 mb-3 overflow-hidden"><div className="bg-blue-600 h-2 rounded-full transition-all duration-75" style={{ width: `${trainingProgress}%` }}></div></div>
+                            <div className="w-full bg-gray-200 rounded-full h-1.5 mb-2 overflow-hidden"><div className="bg-blue-600 h-1.5 rounded-full transition-all duration-75" style={{ width: `${trainingProgress}%` }}></div></div>
                         )}
                         
-                        <div className="border-t pt-2 mt-2">
-                            <button onClick={() => setShowAdvanced(!showAdvanced)} className={`flex items-center gap-2 text-xs font-medium w-full justify-between p-1 rounded ${showAdvanced ? 'text-blue-600' : 'text-gray-500 hover:text-gray-700'}`}>
-                                <span>Advanced</span> {showAdvanced ? <ChevronUp size={14}/> : <ChevronDown size={14} />}
+                        <div className="border-t pt-1 mt-1">
+                            <button onClick={() => setShowAdvanced(!showAdvanced)} className={`flex items-center gap-2 text-[10px] font-medium w-full justify-between p-0.5 rounded ${showAdvanced ? 'text-blue-600' : 'text-gray-500 hover:text-gray-700'}`}>
+                                <span>Advanced</span> {showAdvanced ? <ChevronUp size={12}/> : <ChevronDown size={12} />}
                             </button>
                             
                             {showAdvanced && (
-                                <div className="mt-2 space-y-2 bg-white p-1 animate-in slide-in-from-top-2">
+                                <div className="mt-1 space-y-1.5 bg-white p-0.5 animate-in slide-in-from-top-1">
                                     <div className="flex justify-between items-center">
-                                        <label className="text-xs font-bold text-gray-700">Epochs:</label>
-                                        <input type="number" value={epochs} onChange={(e) => setEpochs(e.target.value)} className="w-12 border rounded px-1 py-0.5 text-xs text-right"/>
+                                        <label className="text-[8px] font-bold text-gray-700">Epochs:</label>
+                                        <input type="number" value={epochs} onChange={(e) => setEpochs(e.target.value)} className="w-10 border rounded px-1 py-0.5 text-[10px] text-right"/>
                                     </div>
                                     <div className="flex justify-between items-center">
-                                        <label className="text-xs font-bold text-gray-700">Batch Size:</label>
-                                        <select value={batchSize} onChange={(e) => setBatchSize(e.target.value)} className="w-12 border rounded px-1 py-0.5 text-xs text-right">
+                                        <label className="text-[8px] font-bold text-gray-700">Batch Size:</label>
+                                        <select value={batchSize} onChange={(e) => setBatchSize(e.target.value)} className="w-10 border rounded px-1 py-0.5 text-[10px] text-right">
                                             <option value="16">16</option>
                                             <option value="32">32</option>
                                             <option value="64">64</option>
                                         </select>
                                     </div>
                                     <div className="flex justify-between items-center">
-                                        <label className="text-xs font-bold text-gray-700">L. Rate:</label>
-                                        <input type="number" value={learningRate} step="0.0001" onChange={(e) => setLearningRate(e.target.value)} className="w-16 border rounded px-1 py-0.5 text-xs text-right"/>
+                                        <label className="text-[8px] font-bold text-gray-700">L. Rate:</label>
+                                        <input type="number" value={learningRate} step="0.0001" onChange={(e) => setLearningRate(e.target.value)} className="w-14 border rounded px-1 py-0.5 text-[10px] text-right"/>
                                     </div>
                                 </div>
                             )}
@@ -402,38 +402,38 @@ const Studio = () => {
                     </div>
                 </div>
 
-                {/* COLUMN 3: PREVIEW */}
+                {/* COLUMN 3: PREVIEW (Compact) */}
                 <div className="w-[35%] flex flex-col gap-3">
                      <div className={`bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden relative transition-all duration-500 ${isModelReadyState ? 'opacity-100' : 'opacity-100 grayscale'}`}>
-                        <div className="p-3 border-b flex justify-between items-center bg-gray-50">
-                            <h2 className="font-bold text-sm text-gray-700">Preview</h2>
-                            <button onClick={() => setShowExportModal(true)} className={`flex items-center gap-1 px-3 py-1 bg-white border border-gray-300 rounded text-xs text-blue-600 font-medium hover:bg-blue-50 transition shadow-sm ${!isModelReadyState && 'hidden'}`}>
-                                <Download size={12}/> Export
+                        <div className="p-2 border-b flex justify-between items-center bg-gray-50">
+                            <h2 className="font-bold text-xs text-gray-700">Preview</h2>
+                            <button onClick={() => setShowExportModal(true)} className={`flex items-center gap-1 px-2 py-0.5 bg-white border border-gray-300 rounded text-[10px] text-blue-600 font-medium hover:bg-blue-50 transition shadow-sm ${!isModelReadyState && 'hidden'}`}>
+                                <Download size={10}/> Export
                             </button>
                         </div>
-                        <div className="p-4">
-                            <div className="aspect-square bg-gray-100 rounded overflow-hidden relative mb-4 ring-2 ring-gray-50">
+                        <div className="p-2">
+                            <div className="aspect-square bg-gray-100 rounded overflow-hidden relative mb-2 ring-2 ring-gray-50">
                                 {isModelReadyState ? (
                                     <video ref={previewVideoRef} className="w-full h-full object-cover transform scale-x-[-1]" playsInline muted />
                                 ) : (
-                                    <div className="absolute inset-0 flex flex-col items-center justify-center text-gray-400 text-center p-4">
-                                         <div className="w-12 h-12 mb-3 rounded-full border-2 border-gray-300 flex items-center justify-center"><VideoOff size={24} /></div>
-                                        <p className="text-xs">Train a model on the left to preview it here.</p>
+                                    <div className="absolute inset-0 flex flex-col items-center justify-center text-gray-400 text-center p-2">
+                                         <div className="w-10 h-10 mb-2 rounded-full border-2 border-gray-300 flex items-center justify-center"><VideoOff size={20} /></div>
+                                        <p className="text-[10px]">Train a model on the left to preview it here.</p>
                                     </div>
                                 )}
                             </div>
                             
-                            <div className="space-y-2">
-                                <div className="flex justify-between text-xs text-gray-400 font-bold uppercase tracking-wider mb-1"><span>Output</span> <span>Confidence</span></div>
+                            <div className="space-y-1">
+                                <div className="flex justify-between text-[8px] text-gray-400 font-bold uppercase tracking-wider mb-0.5"><span>Output</span> <span>Confidence</span></div>
                                 {classes.map((cls) => {
                                     const result = predictionResults.find(r => r.classId === cls.id);
                                     const score = result ? result.score : 0;
                                     const isWinner = score > 50;
                                     return (
-                                        <div key={cls.id} className="flex items-center gap-2 group h-8">
-                                            <span className={`text-xs w-20 truncate transition ${isWinner ? 'font-bold text-gray-800' : 'text-gray-500'}`}>{cls.name}</span>
-                                            <div className="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden relative shadow-inner"><div className={`h-full transition-all duration-200 ease-out ${getClassColor(cls.id)}`} style={{ width: `${score}%` }} /></div>
-                                            <span className={`text-xs w-8 text-right font-medium ${isWinner ? 'text-gray-800' : 'text-gray-400'}`}>{score.toFixed(0)}%</span>
+                                        <div key={cls.id} className="flex items-center gap-2 group h-6">
+                                            <span className={`text-[10px] w-16 truncate transition ${isWinner ? 'font-bold text-gray-800' : 'text-gray-500'}`}>{cls.name}</span>
+                                            <div className="flex-1 h-1.5 bg-gray-100 rounded-full overflow-hidden relative shadow-inner"><div className={`h-full transition-all duration-200 ease-out ${getClassColor(cls.id)}`} style={{ width: `${score}%` }} /></div>
+                                            <span className={`text-[10px] w-6 text-right font-medium ${isWinner ? 'text-gray-800' : 'text-gray-400'}`}>{score.toFixed(0)}%</span>
                                         </div>
                                     );
                                 })}
@@ -447,10 +447,10 @@ const Studio = () => {
       
       {showExportModal && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-            <div className="bg-white rounded-xl shadow-2xl w-full max-w-sm p-5">
-                <h2 className="text-base font-bold mb-3">Export Model</h2>
-                <button onClick={downloadProject} className="w-full py-2 bg-blue-600 text-white font-bold rounded text-sm">Download JSON</button>
-                <button onClick={() => setShowExportModal(false)} className="w-full py-2 mt-2 text-gray-500 text-sm">Cancel</button>
+            <div className="bg-white rounded-xl shadow-2xl w-full max-w-sm p-4">
+                <h2 className="text-base font-bold mb-2">Export Model</h2>
+                <button onClick={downloadProject} className="w-full py-1.5 bg-blue-600 text-white font-bold rounded text-xs">Download JSON</button>
+                <button onClick={() => setShowExportModal(false)} className="w-full py-1.5 mt-1 text-gray-500 text-xs">Cancel</button>
             </div>
         </div>
       )}
